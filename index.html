@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday Nazzy! 🎉</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: #1a1a1a;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            color: #fff;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            padding: 20px;
+        }
+
+        .initial-screen {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            color: #fff;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .video-container {
+            margin: 30px 0;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .reveal-button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a6f, #ff6b9d);
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            padding: 20px 40px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            font-family: 'Comic Sans MS', cursive;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 20px;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .reveal-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+        }
+
+        .reveal-button:active {
+            transform: scale(0.95);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .message-container {
+            display: none;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 40px;
+            background: rgba(30, 30, 30, 0.95);
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .message-container.show {
+            display: block;
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message-text {
+            font-size: 1.5rem;
+            color: #fff;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .message-gif {
+            max-width: 300px;
+            margin: 20px auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+        }
+
+        .message-gif img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .next-button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            font-size: 1.3rem;
+            font-weight: bold;
+            padding: 15px 35px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+            transition: all 0.3s ease;
+            font-family: 'Comic Sans MS', cursive;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .next-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+        }
+
+        .yes-no-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+            position: relative;
+            min-height: 100px;
+        }
+
+        .yes-button, .no-button {
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 20px 50px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Comic Sans MS', cursive;
+            min-width: 150px;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        .yes-button {
+            background: linear-gradient(45deg, #00d4aa, #00b894);
+            color: white;
+            box-shadow: 0 8px 20px rgba(0, 212, 170, 0.4);
+            transition: all 0.4s ease;
+        }
+
+        .yes-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 30px rgba(0, 212, 170, 0.6);
+        }
+
+        .yes-button.expanding {
+            animation: expandButton 0.5s ease-out forwards;
+        }
+
+        @keyframes expandButton {
+            to {
+                min-width: 80%;
+                padding: 20px 100px;
+            }
+        }
+
+        .no-button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a6f);
+            color: white;
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+            transition: all 0.4s ease;
+        }
+
+        .no-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 30px rgba(255, 107, 107, 0.6);
+        }
+
+        .no-button.hidden {
+            opacity: 0;
+            transform: scale(0);
+            pointer-events: none;
+            transition: all 0.5s ease;
+        }
+
+        .final-container {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .final-container.show {
+            display: block;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .happy-gif {
+            max-width: 400px;
+            margin: 20px auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .happy-gif img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .opay-number {
+            font-size: 2rem;
+            color: #00d4aa;
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(0, 212, 170, 0.1);
+            border-radius: 15px;
+            border: 2px solid rgba(0, 212, 170, 0.3);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            position: absolute;
+            animation: confetti-fall linear infinite;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0) rotate(0deg); opacity: 1; }
+            50% { transform: scale(1.5) rotate(180deg); opacity: 1; }
+            100% { transform: scale(2) rotate(360deg); opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { 
+                font-size: 2rem; 
+                padding: 0 10px;
+            }
+            
+            .container {
+                padding: 10px;
+                max-width: 100%;
+            }
+            
+            .video-container {
+                max-width: 90%;
+                margin: 20px auto;
+            }
+            
+            .reveal-button { 
+                font-size: 1.2rem; 
+                padding: 15px 25px;
+                letter-spacing: 1px;
+            }
+            
+            .message-container {
+                padding: 25px 20px;
+                margin: 20px 10px;
+                max-width: 95%;
+            }
+            
+            .message-text { 
+                font-size: 1.1rem; 
+                line-height: 1.6;
+                margin-bottom: 20px;
+            }
+            
+            .message-gif {
+                max-width: 250px;
+                margin: 15px auto;
+            }
+            
+            .next-button {
+                font-size: 1.1rem;
+                padding: 12px 25px;
+            }
+            
+            .yes-button, .no-button { 
+                font-size: 1.1rem; 
+                padding: 15px 25px; 
+                min-width: 100px;
+            }
+            
+            .yes-no-container {
+                flex-direction: column;
+                gap: 15px;
+                margin-top: 20px;
+            }
+            
+            .opay-number { 
+                font-size: 1.3rem;
+                padding: 15px;
+            }
+            
+            .happy-gif {
+                max-width: 90%;
+            }
+            
+            .final-container {
+                padding: 30px 20px;
+            }
+            
+            .final-container h2 {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 { 
+                font-size: 1.5rem;
+            }
+            
+            .video-container {
+                max-width: 95%;
+            }
+            
+            .reveal-button {
+                font-size: 1rem;
+                padding: 12px 20px;
+            }
+            
+            .message-container {
+                padding: 20px 15px;
+            }
+            
+            .message-text {
+                font-size: 1rem;
+            }
+            
+            .message-gif {
+                max-width: 200px;
+            }
+            
+            .yes-button, .no-button {
+                font-size: 1rem;
+                padding: 12px 20px;
+                min-width: 90px;
+            }
+            
+            .opay-number {
+                font-size: 1.1rem;
+                padding: 12px;
+            }
+            
+            .final-container {
+                padding: 25px 15px;
+            }
+            
+            .final-container h2 {
+                font-size: 1.8rem;
+            }
+            
+            .happy-gif {
+                max-width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="initial-screen" id="initialScreen">
+            <h1>🎉 Happy Birthday Nazzy! 🎉</h1>
+            
+            <div class="video-container">
+                <video autoplay loop muted playsinline>
+                    <source src="Assest/nazzy gif.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <button class="reveal-button" onclick="startReveal()">
+                Click Here! no be money shaa😂🎁
+            </button>
+        </div>
+
+        <div class="message-container" id="message1">
+            <div class="message-text">
+                🎂🎉 Happy Birthday, Nazzy! 🎉🎂<br><br>
+                On this beautiful day, I want you to know just how much you mean to me. You bring so much light and joy into my life, and I'm truly grateful for you. May this special day be filled with endless joy, laughter, and all the happiness your beautiful heart deserves!<br><br>
+                <strong>Prayer:</strong><br>
+                May God bless you abundantly on this special day and throughout the coming year. May He grant you good health, success in all your endeavors, and surround you with love and peace. As you continue your journey, chasing your dreams with determination and grace, may God guide your steps and bless your path. Happy Birthday, and may God's favor be upon you always! 🙏
+            </div>
+            <div class="message-gif">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcTM0cDQ0bGxxbG5ia3Vlb281NDZldnIwbDA4bDlsNTFteGxseWZtMSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/EPOZIbyUAzsrMVYhZ8/giphy.gif" alt="Amen">
+            </div>
+            <button class="next-button" onclick="showNext(2)">Continue →</button>
+        </div>
+
+        <div class="message-container" id="message2">
+            <div class="message-text">
+                Thank You<br><br>
+                I want to take this moment to thank you for being such an amazing mom to me. Your love, care, and unwavering support have meant everything to me. We've been here for each other through thick and thin, and I can't express how peaceful and grateful I feel knowing you're still around. Your presence in my life is a blessing I cherish every single day. Thank you for everything! 💝
+            </div>
+            <div class="message-gif">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMDcwemg4MzljYTY0eGR2NTBobWZtbDd2dDlwdGF2cGF5NGU0NWF6bSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/IcGkqdUmYLFGE/giphy.gif" alt="Thank You">
+            </div>
+            <button class="next-button" onclick="showNext(3)">Continue →</button>
+        </div>
+
+        <div class="message-container" id="message3">
+            <div class="message-text">
+                You Are Amazing <br><br>
+                Nazzy, you are truly remarkable! You possess such incredible strength, wisdom, and ambition. Your unique beauty, both inside and out, combined with your classy nature, shines through in everything you do. You're building an incredible future for yourself, and you've become a source of inspiration to so many people around you. Keep being the amazing, beautiful, and inspiring person you are! You deserve all the flowers! 🌹✨
+            </div>
+            <div class="message-gif">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcTYweWx2aW1nZTR1M2pmNGNxM2NoZHhzMGJucXgwMHIyem55aWpiZyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/izxssunslJds0wvn7H/giphy.gif" alt="Take Your Flowers">
+            </div>
+            <button class="next-button" onclick="showNext(4)">Continue →</button>
+        </div>
+
+        <div class="message-container" id="message4">
+            <div class="message-text">
+                One More Thing... <br><br>
+                you wanna continue being my amazing sister? If yes, drop me 5k fess Tanss! 😂<br><br>
+                What do you say?
+            </div>
+            <div class="message-gif">
+                <img src="https://media.giphy.com/media/l0HlBO7eyXzSZkJri/giphy.gif" alt="Money Time">
+            </div>
+            <div class="yes-no-container">
+                <button class="yes-button" id="yesButton" onclick="handleYes()">YES! 💚</button>
+                <button class="no-button" id="noButton" onclick="handleNo()">NO 😢</button>
+            </div>
+        </div>
+
+        <div class="final-container" id="finalContainer">
+            <h2 style="font-size: 2.5rem; margin-bottom: 20px; color: #00d4aa;">🎉 Nice One 🎉</h2>
+            <div class="happy-gif">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdnZ0cXJodGljc2d4aDlvaTdsazRiamNmdThsa3l6MmR0eWEzOXJ1MiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/ZIz7wYItfiYpCHA60F/giphy.gif" alt="ferguson">
+            </div>
+            <div class="opay-number">
+                 Drop am for opay 07044375968
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 0;
+        let noClickCount = 0;
+
+        function startReveal() {
+            document.getElementById('initialScreen').style.display = 'none';
+            showNext(1);
+            createConfetti();
+        }
+
+        function showNext(step) {
+            // Hide all messages
+            for (let i = 1; i <= 4; i++) {
+                const msg = document.getElementById('message' + i);
+                if (msg) {
+                    msg.classList.remove('show');
+                }
+            }
+
+            // Show the requested message
+            setTimeout(() => {
+                const message = document.getElementById('message' + step);
+                if (message) {
+                    message.classList.add('show');
+                    message.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    // Add party poppers for all messages
+                    createPartyPoppers();
+                    createConfetti();
+                }
+            }, 300);
+        }
+
+        function handleYes() {
+            // Hide message 4
+            document.getElementById('message4').classList.remove('show');
+            
+            // Show party poppers immediately
+            createPartyPoppers();
+            createConfetti();
+            
+            // Show final container
+            setTimeout(() => {
+                document.getElementById('finalContainer').classList.add('show');
+                document.getElementById('finalContainer').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 300);
+        }
+
+        function handleNo() {
+            noClickCount++;
+            const yesButton = document.getElementById('yesButton');
+            const noButton = document.getElementById('noButton');
+            
+            if (noClickCount === 1) {
+                // First click: reduce button and show "no keh"
+                noButton.style.transform = 'scale(0.8)';
+                noButton.style.padding = '15px 30px';
+                noButton.style.fontSize = '1.2rem';
+                noButton.textContent = 'no keh 😢';
+                
+                // Make yes button bigger
+                yesButton.style.minWidth = '200px';
+                yesButton.style.padding = '22px 60px';
+                yesButton.style.fontSize = '1.6rem';
+            } else if (noClickCount === 2) {
+                // Second click: reduce more and show "please"
+                noButton.style.transform = 'scale(0.6)';
+                noButton.style.padding = '12px 25px';
+                noButton.style.fontSize = '1rem';
+                noButton.textContent = 'please 😭';
+                
+                // Make yes button even bigger
+                yesButton.style.minWidth = '300px';
+                yesButton.style.padding = '25px 80px';
+                yesButton.style.fontSize = '1.7rem';
+            } else if (noClickCount >= 3) {
+                // Third click: YES covers everything
+                noButton.style.display = 'none';
+                yesButton.style.minWidth = '95%';
+                yesButton.style.width = '95%';
+                yesButton.style.padding = '30px 100px';
+                yesButton.style.fontSize = '2rem';
+                yesButton.style.position = 'absolute';
+                yesButton.style.left = '50%';
+                yesButton.style.transform = 'translateX(-50%)';
+            }
+        }
+
+        function createConfetti() {
+            const colors = ['#ff6b6b', '#4ecdc4', '#ffe66d', '#a8e6cf', '#ffd3a5', '#fd79a8', '#fdcb6e', '#00d4aa'];
+            const confettiCount = 100;
+
+            for (let i = 0; i < confettiCount; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    confetti.style.animationDelay = Math.random() * 2 + 's';
+                    confetti.style.width = (Math.random() * 10 + 5) + 'px';
+                    confetti.style.height = (Math.random() * 10 + 5) + 'px';
+                    document.body.appendChild(confetti);
+
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 5000);
+                }, i * 50);
+            }
+        }
+
+        function createPartyPoppers() {
+            const emojis = ['🎉', '🎊', '🎈', '🎁', '🎂', '✨', '🌟', '💫', '🎆', '🎇']; // Only party/shiny emojis
+            const count = 45; // Medium amount
+
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const popper = document.createElement('div');
+                    popper.style.position = 'fixed';
+                    popper.style.fontSize = (Math.random() * 2 + 3) + 'rem'; // Random size between 3-5rem
+                    popper.style.zIndex = '1000';
+                    popper.style.pointerEvents = 'none';
+                    popper.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                    popper.style.left = Math.random() * 100 + '%';
+                    popper.style.top = Math.random() * 100 + '%';
+                    popper.style.animation = 'pop ' + (Math.random() * 0.3 + 0.4) + 's ease-out';
+                    document.body.appendChild(popper);
+
+                    setTimeout(() => {
+                        popper.remove();
+                    }, 700);
+                }, i * 80); // Moderate timing
+            }
+        }
+
+        // Initialize confetti and party poppers on page load (medium display)
+        window.addEventListener('load', () => {
+            createConfetti();
+            createPartyPoppers();
+        });
+    </script>
+</body>
+</html>
